@@ -49,6 +49,8 @@ public class RedisConfig extends CachingConfigurerSupport{
     @Bean
     public CacheManager cacheManager(
             @SuppressWarnings("rawtypes") RedisTemplate redisTemplate) {
+    	CacheManager cacheManager = new RedisCacheManager(redisTemplate);
+    	
         return new RedisCacheManager(redisTemplate);
     }
 

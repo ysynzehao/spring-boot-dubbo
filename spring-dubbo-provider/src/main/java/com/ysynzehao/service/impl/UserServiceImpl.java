@@ -5,6 +5,8 @@ import com.ysynzehao.entry.User;
 import com.ysynzehao.redis.service.JRedisService;
 import com.ysynzehao.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
 
@@ -19,12 +21,13 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private JRedisService jRedisService;
 
-    //@Cacheable(value = "usercache",keyGenerator = "wiselyKeyGenerator")
+    @Cacheable(value = "usercache",keyGenerator = "wiselyKeyGenerator")
     @Override
     public List<User> getUserList() {
         return userRepository.findAll();
     }
-
+    
+    @CachePut(value = "usercache",keyGenerator = "wiselyKeyGenerator")
     @Override
     public User saveUser(User user) {
         return userRepository.save(user);
