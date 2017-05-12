@@ -62,7 +62,7 @@ public class JRedisServiceImpl implements JRedisService{
                 return true;
             }
         });
-        return false;
+        return result;
     }
 
     public String get(final String key){
